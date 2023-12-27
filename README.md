@@ -2,6 +2,10 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
+Download file db_uas_pbkk.sql and IMPORT into your localhost database
+
+File backend in folder backend_uas_pbkk
+
 First, run the development server:
 
 ```bash
