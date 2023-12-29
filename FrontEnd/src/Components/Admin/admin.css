@@ -79,13 +79,13 @@
     max-width: 400px;
     width: 100%;
     text-align: center;
-    max-height: 80vh; /* Atur ketinggian maksimum */
-    overflow-y: auto; /* Tambahkan pengguliran vertikal jika konten melebihi ketinggian maksimum */
+    max-height: 80vh;
+    overflow-y: auto;
 }
 
 .popup-content textarea {
-    resize: vertical; /* Agar textarea hanya dapat ditarik ke bawah */
-    overflow-y: auto; /* Tambahkan scrollbar vertikal jika konten melebihi tinggi textarea */
+    resize: vertical;
+    overflow-y: auto;
 }
 
 .popup-content h2 {
