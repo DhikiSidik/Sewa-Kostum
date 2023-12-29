@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 import './user.css';
 
 const DummyData = [
@@ -68,58 +69,66 @@ const DetailPopup = ({ data, onClose, onMessageClick }) => {
     );
   };
 
-const User = () => {
-  const [isPopupOpen, setPopupOpen] = useState(false);
-  const [selectedData, setSelectedData] = useState(null);
-
-  const openPopup = (data) => {
-    setSelectedData(data);
-    setPopupOpen(true);
-  };
-
-  const closePopup = () => {
-    setSelectedData(null);
-    setPopupOpen(false);
-  };
-
-  const handleMessageClick = () => {
-    console.log('Tombol Pesan Diklik!');
-    // Implementasikan logika pengiriman pesan di sini
-  };
-
-  return (
-    <div className="body">
-      <header className="header">
-        <div className="left-section">
-          <h1 className='admin-dashboard'>Nama APP apa ?</h1>
-        </div>
-        <div className="right-section">
-          <div className="search-container">
-            <input type="text" placeholder="Search..." />
-            <FontAwesomeIcon icon={faSearch} className='icon-search'/>
+  const User = () => {
+    const [isPopupOpen, setPopupOpen] = useState(false);
+    const [selectedData, setSelectedData] = useState(null);
+  
+    const openPopup = (data) => {
+      setSelectedData(data);
+      setPopupOpen(true);
+    };
+  
+    const closePopup = () => {
+      setSelectedData(null);
+      setPopupOpen(false);
+    };
+  
+    const handleMessageClick = () => {
+      console.log('Tombol Pesan Diklik!');
+      // Implementasikan logika pengiriman pesan di sini
+    };
+  
+    const handleLoginClick = () => {
+      console.log('Tombol Login Diklik!');
+      // Implementasikan logika login di sini
+    };
+  
+    return (
+      <div className="body">
+        <header className="header">
+          <div className="left-section">
+            <h1 className='admin-dashboard'>Nama APP apa ?</h1>
           </div>
+          <div className="right-section">
+            <div className="search-container">
+              <input type="text" placeholder="Search..." />
+              <FontAwesomeIcon icon={faSearch} className='icon-search'/>
+            </div>
+            <div className="login-container">
+              <Link to="/login" style={{ color: 'white' }}>Login</Link>
+            </div>
+          </div>
+        </header>
+        <div className="card-container">
+          {DummyData.map((data) => (
+            <Card
+              key={data.id}
+              imageUrl={data.imageUrl}
+              namaBarang={data.namaBarang}
+              hargaSewa={data.hargaSewa}
+              status={data.status}
+              onDetailClick={() => openPopup(data)}
+            />
+          ))}
         </div>
-      </header>
-      <div className="card-container">
-        {DummyData.map((data) => (
-          <Card
-            key={data.id}
-            imageUrl={data.imageUrl}
-            namaBarang={data.namaBarang}
-            hargaSewa={data.hargaSewa}
-            status={data.status}
-            onDetailClick={() => openPopup(data)}
-          />
-        ))}
+  
+        {isPopupOpen && (
+          <>
+            <DetailPopup data={selectedData} onClose={closePopup} onMessageClick={handleMessageClick} />
+          </>
+        )}
       </div>
-
-      {isPopupOpen && (
-        <>
-          <DetailPopup data={selectedData} onClose={closePopup} onMessageClick={handleMessageClick} />
-        </>
-      )}
-    </div>
-  );
-};
-
-export default User;
+    );
+  };
+  
+  export default User;
