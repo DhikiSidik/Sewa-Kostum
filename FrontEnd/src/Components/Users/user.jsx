@@ -88,11 +88,6 @@ const DetailPopup = ({ data, onClose, onMessageClick }) => {
       // Implementasikan logika pengiriman pesan di sini
     };
   
-    const handleLoginClick = () => {
-      console.log('Tombol Login Diklik!');
-      // Implementasikan logika login di sini
-    };
-  
     return (
       <div className="body">
         <header className="header">
