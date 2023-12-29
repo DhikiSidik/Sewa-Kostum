@@ -96,7 +96,6 @@ const DetailPopup = ({ data, onClose, onMessageClick }) => {
         window.location.href = `https://api.whatsapp.com/send?phone=+6289684633222&text=${encodeURIComponent(fullMessage)}`;
       }
     };
-    
   
     return (
       <div className="body">
