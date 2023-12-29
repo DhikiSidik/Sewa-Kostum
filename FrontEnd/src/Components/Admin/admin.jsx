@@ -9,11 +9,7 @@ const Admin = () => {
   const [isPopupVisible, setPopupVisible] = useState(false);
   const [editedItem, setEditedItem] = useState({
     id: '',
-<<<<<<< HEAD
     kostum: '',
-=======
-    nama: '',
->>>>>>> 43521b540ff94cd55c072c38a5c85af2c3b12a5b
     gambar: '',
     deskripsi: '',
     harga: '',
@@ -44,11 +40,7 @@ const Admin = () => {
     setPopupVisible(false);
     setEditedItem({
       id: '',
-<<<<<<< HEAD
       kostum: '',
-=======
-      nama: '',
->>>>>>> 43521b540ff94cd55c072c38a5c85af2c3b12a5b
       gambar: '',
       deskripsi: '',
       harga: '',
@@ -140,11 +132,7 @@ const Admin = () => {
         <table className="data-table">
           <thead>
             <tr>
-<<<<<<< HEAD
               <th>kostum</th>
-=======
-              <th>Nama</th>
->>>>>>> 43521b540ff94cd55c072c38a5c85af2c3b12a5b
               <th>Gambar</th>
               <th>Deskripsi</th>
               <th>Harga</th>
@@ -154,21 +142,12 @@ const Admin = () => {
           </thead>
           <tbody>
             {tableData
-<<<<<<< HEAD
               .filter((item) => item.kostum.toLowerCase().includes(searchQuery.toLowerCase()))
               .map((item) => (
                 <tr key={item.id}>
                   <td>{item.kostum}</td>
                   <td>
                     <img src={item.gambar} alt={item.kostum} className="table-image" />
-=======
-              .filter((item) => item.nama.toLowerCase().includes(searchQuery.toLowerCase()))
-              .map((item) => (
-                <tr key={item.id}>
-                  <td>{item.nama}</td>
-                  <td>
-                    <img src={item.gambar} alt={item.nama} className="table-image" />
->>>>>>> 43521b540ff94cd55c072c38a5c85af2c3b12a5b
                   </td>
                   <td>{item.deskripsi.slice(0, 20)}{item.deskripsi.length > 20 ? '...' : ''}</td>
                   <td>{`Rp. ${item.harga}`}</td>
@@ -199,19 +178,11 @@ const Admin = () => {
           <div className="popup-content">
             <h2>{editedItem.id ? 'Edit' : 'Tambah'} Barang</h2>
             <form onSubmit={handleFormSubmit}>
-<<<<<<< HEAD
               <label>kostum:</label>
               <input
                 type="text"
                 name="kostum"
                 value={editedItem.kostum}
-=======
-              <label>Nama:</label>
-              <input
-                type="text"
-                name="nama"
-                value={editedItem.nama}
->>>>>>> 43521b540ff94cd55c072c38a5c85af2c3b12a5b
                 onChange={handleInputChange}
                 required
               />
@@ -278,8 +249,4 @@ const Admin = () => {
   );
 };
 
-<<<<<<< HEAD
 export default Admin;
-=======
-export default Admin;
->>>>>>> 43521b540ff94cd55c072c38a5c85af2c3b12a5b
