@@ -84,8 +84,17 @@ const DetailPopup = ({ data, onClose, onMessageClick }) => {
     };
   
     const handleMessageClick = () => {
-      console.log('Tombol Pesan Diklik!');
-      // Implementasikan logika pengiriman pesan di sini
+      if (selectedData) {
+        const { namaBarang, hargaSewa, Deskripsi, imageUrl } = selectedData;
+        
+        const message = `\n\nSaya ingin menyewa: ${namaBarang}.\nHarga sewa: ${hargaSewa} per 3 hari.\nDeskripsi: ${Deskripsi}`;
+        
+        const imageAttachment = `Foto Barang: (${imageUrl})`;
+    
+        const fullMessage =  imageAttachment + message;
+    
+        window.location.href = `https://api.whatsapp.com/send?phone=+6289684633222&text=${encodeURIComponent(fullMessage)}`;
+      }
     };
   
     return (
