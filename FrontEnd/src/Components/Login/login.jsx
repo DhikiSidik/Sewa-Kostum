@@ -16,7 +16,6 @@ const Login = () => {
     // Your authentication logic
 
     if (username && password) {
-      // If authenticated, navigate to the admin page
       navigate('/admin');
     } else {
       console.log('Authentication failed');
