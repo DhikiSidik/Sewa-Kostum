@@ -81,7 +81,7 @@ router.post('/login', (req, res, next) => {
                 userId: result[0].id,
               },
               'SECRETKEY',
-              { expiresIn: '7d' }
+              { expiresIn: '7h' }
             );
             return res.status(200).send({
               message: 'Logged in!',

@@ -165,6 +165,7 @@
 .data-table {
     width: 100%;
     border-collapse: collapse;
+    margin-top: 80px;
 }
 
 .data-table th,

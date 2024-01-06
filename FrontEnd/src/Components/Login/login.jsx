@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { FaUserAlt, FaLock } from 'react-icons/fa';
 import './login.css';
 import LoginBackground from './loginBg';
+import axios from 'axios';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -10,15 +11,26 @@ const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
 
-    // Your authentication logic
+    try {
+      const response = await axios.post('http://localhost:4000/user/login', {
+        username,
+        password,
+      });
 
-    if (username && password) {
-      navigate('/admin');
-    } else {
-      console.log('Authentication failed');
+      if (response.status === 200) {
+        // If authenticated, store the token and navigate to the admin page
+        const { token, user } = response.data;
+        localStorage.setItem('token', token);
+        localStorage.setItem('user', JSON.stringify(user));
+        navigate('/admin');
+      } else {
+        console.log('Authentication failed');
+      }
+    } catch (error) {
+      console.error('Error during authentication:', error);
     }
   };
 
