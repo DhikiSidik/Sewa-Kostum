@@ -1,10 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import './admin.css';
 
 const Admin = () => {
+  const navigate = useNavigate();
+  const token = localStorage.getItem('token');
+
   const [tableData, setTableData] = useState([]);
   const [isPopupVisible, setPopupVisible] = useState(false);
   const [editedItem, setEditedItem] = useState({
@@ -19,18 +23,30 @@ const Admin = () => {
 
   const API_URL = 'http://localhost:4000/kostum';
 
-  useEffect(() => {
-    getList();
-  }, []);
-
-  const getList = async () => {
+  const fetchList = useCallback(async () => {
     try {
-      const response = await axios.get(API_URL);
+      const response = await axios.get(API_URL, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setTableData(response.data.data);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
-  };
+  }, [token, API_URL]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (!token) {
+        navigate('/login');
+      } else {
+        await fetchList();
+      }
+    };
+
+    fetchData();
+  }, [token, navigate, fetchList]);
 
   const handleAddButtonClick = () => {
     setPopupVisible(true);
@@ -56,10 +72,14 @@ const Admin = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`${API_URL}/delete/${id}`);
-      getList();
+      await axios.delete(`${API_URL}/delete/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      fetchList();
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -75,17 +95,27 @@ const Admin = () => {
     e.preventDefault();
 
     try {
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      };
+
       if (!editedItem.id) {
-        const response = await axios.post(`${API_URL}/add`, editedItem);
+        const response = await axios.post(`${API_URL}/add`, editedItem, { headers });
         console.log('Server response:', response.data);
       } else {
-        const response = await axios.patch(`${API_URL}/edit/${editedItem.id}`, editedItem);
+        const response = await axios.patch(`${API_URL}/edit/${editedItem.id}`, editedItem, { headers });
         console.log('Server response:', response.data);
       }
 
-      getList();
+      // Fetch updated data after adding or editing
+      await fetchList();
     } catch (error) {
       console.error('Error:', error);
+
+      // Log the specific error message from the server if available
+      if (error.response) {
+        console.error('Server error:', error.response.data);
+      }
     }
 
     handleClosePopup();
@@ -142,12 +172,18 @@ const Admin = () => {
           </thead>
           <tbody>
             {tableData
-              .filter((item) => item.nama.toLowerCase().includes(searchQuery.toLowerCase()))
+              .filter((item) =>
+                item.nama.toLowerCase().includes(searchQuery.toLowerCase())
+              )
               .map((item) => (
                 <tr key={item.id}>
                   <td>{item.nama}</td>
                   <td>
-                    <img src={item.gambar} alt={item.nama} className="table-image" />
+                    <img
+                      src={item.gambar}
+                      alt={item.nama}
+                      className="table-image"
+                    />
                   </td>
                   <td>{item.deskripsi.slice(0, 20)}{item.deskripsi.length > 20 ? '...' : ''}</td>
                   <td>{`Rp. ${item.harga}`}</td>
