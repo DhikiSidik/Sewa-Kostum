@@ -34,9 +34,10 @@ router.get('/', function (req, res) {
 router.post('/add', [
 
     //validation
-    body('id').notEmpty(),
+    // body('id').notEmpty(),
     body('kostum').notEmpty(),
     body('gambar').notEmpty(),
+    body('deskripsi').notEmpty(),
     body('harga').notEmpty(),
     body('status').notEmpty()
 
@@ -52,9 +53,10 @@ router.post('/add', [
 
     //define formData
     let formData = {
-        id: req.body.id,
+        // id: req.body.id,
         kostum: req.body.kostum,
         gambar: req.body.gambar,
+        deskripsi: req.body.deskripsi,
         harga: req.body.harga,
         status: req.body.status
     }
@@ -120,6 +122,7 @@ router.patch('/edit/:id', [
     //validation
     body('kostum').notEmpty(),
     body('gambar').notEmpty(),
+    body('deskripsi').notEmpty(),
     body('harga').notEmpty(),
     body('status').notEmpty()
 
@@ -140,6 +143,7 @@ router.patch('/edit/:id', [
     let formData = {
         kostum: req.body.kostum,
         gambar: req.body.gambar,
+        deskripsi: req.body.deskripsi,
         harga: req.body.harga,
         status: req.body.status
     }

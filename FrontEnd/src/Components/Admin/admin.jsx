@@ -13,7 +13,7 @@ const Admin = () => {
     gambar: '',
     deskripsi: '',
     harga: '',
-    status: '',
+    status: 'tersedia',
   });
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -76,6 +76,7 @@ const Admin = () => {
 
     try {
       if (!editedItem.id) {
+        const { id, ...newItem } = editedItem;
         const response = await axios.post(`${API_URL}/add`, editedItem);
         console.log('Server response:', response.data);
       } else {
