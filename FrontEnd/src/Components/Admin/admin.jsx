@@ -9,7 +9,7 @@ const Admin = () => {
   const [isPopupVisible, setPopupVisible] = useState(false);
   const [editedItem, setEditedItem] = useState({
     id: '',
-    nama: '',
+    kostum: '',
     gambar: '',
     deskripsi: '',
     harga: '',
@@ -40,7 +40,7 @@ const Admin = () => {
     setPopupVisible(false);
     setEditedItem({
       id: '',
-      nama: '',
+      kostum: '',
       gambar: '',
       deskripsi: '',
       harga: '',
@@ -132,7 +132,7 @@ const Admin = () => {
         <table className="data-table">
           <thead>
             <tr>
-              <th>Nama</th>
+              <th>kostum</th>
               <th>Gambar</th>
               <th>Deskripsi</th>
               <th>Harga</th>
@@ -142,12 +142,12 @@ const Admin = () => {
           </thead>
           <tbody>
             {tableData
-              .filter((item) => item.nama.toLowerCase().includes(searchQuery.toLowerCase()))
+              .filter((item) => item.kostum.toLowerCase().includes(searchQuery.toLowerCase()))
               .map((item) => (
                 <tr key={item.id}>
-                  <td>{item.nama}</td>
+                  <td>{item.kostum}</td>
                   <td>
-                    <img src={item.gambar} alt={item.nama} className="table-image" />
+                    <img src={item.gambar} alt={item.kostum} className="table-image" />
                   </td>
                   <td>{item.deskripsi.slice(0, 20)}{item.deskripsi.length > 20 ? '...' : ''}</td>
                   <td>{`Rp. ${item.harga}`}</td>
@@ -178,11 +178,11 @@ const Admin = () => {
           <div className="popup-content">
             <h2>{editedItem.id ? 'Edit' : 'Tambah'} Barang</h2>
             <form onSubmit={handleFormSubmit}>
-              <label>Nama:</label>
+              <label>kostum:</label>
               <input
                 type="text"
-                name="nama"
-                value={editedItem.nama}
+                name="kostum"
+                value={editedItem.kostum}
                 onChange={handleInputChange}
                 required
               />
