@@ -100,7 +100,7 @@ const Admin = () => {
       };
 
       if (!editedItem.id) {
-        const response = await axios.post(`${API_URL}/add`, editedItem, { headers });
+        const response = await axios.post(`${API_URL}/add`, { ...editedItem, status: 'Tersedia' }, { headers });
         console.log('Server response:', response.data);
       } else {
         const response = await axios.patch(`${API_URL}/edit/${editedItem.id}`, editedItem, { headers });
@@ -173,7 +173,7 @@ const Admin = () => {
           <tbody>
             {tableData
               .filter((item) =>
-                item.nama.toLowerCase().includes(searchQuery.toLowerCase())
+                  item && item.nama && item.nama.toLowerCase().includes(searchQuery.toLowerCase())
               )
               .map((item) => (
                 <tr key={item.id}>

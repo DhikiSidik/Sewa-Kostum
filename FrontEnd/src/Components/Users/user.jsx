@@ -4,34 +4,6 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import './user.css';
 
-const DummyData = [
-  {
-    id: 1,
-    imageUrl: 'https://i.pinimg.com/1200x/66/19/5d/66195dbdc70b25a0a56efa11c499c36e.jpg',
-    Deskripsi: 'waduh cantik bet',
-    namaBarang: 'Barang 1',
-    hargaSewa: 'Rp 50.000',
-    status: 'Tersedia',
-  },
-  {
-    id: 2,
-    imageUrl: 'https://i.pinimg.com/1200x/66/19/5d/66195dbdc70b25a0a56efa11c499c36e.jpg',
-    Deskripsi: 'waduh cantik bet',
-    namaBarang: 'Barang 1',
-    hargaSewa: 'Rp 50.00',
-    status: 'Tersedia',
-  },
-  {
-    id: 3,
-    imageUrl: 'https://i.pinimg.com/1200x/66/19/5d/66195dbdc70b25a0a56efa11c499c36e.jpg',
-    Deskripsi: 'waduh cantik bet',
-    namaBarang: 'Barang 1',
-    hargaSewa: 'Rp 50.000',
-    status: 'Tersedia',
-  },
-];
-
-
 const Card = ({ imageUrl, namaBarang, hargaSewa, status, onDetailClick }) => {
   return (
     <div className="card">
@@ -105,20 +77,20 @@ const User = () => {
 
   const handleMessageClick = () => {
     if (selectedData) {
-      const { namaBarang, hargaSewa, Deskripsi, imageUrl } = selectedData;
-
-      const message = `\n\nSaya ingin menyewa: ${namaBarang}.\nHarga sewa: ${hargaSewa} per 3 hari.\nDeskripsi: ${Deskripsi}`;
-
-      const imageAttachment = `Foto Barang: (${imageUrl})`;
-
+      const { kostum, harga, deskripsi, gambar } = selectedData;
+  
+      const message = `\n\nSaya ingin menyewa: ${kostum}.\nHarga sewa: ${harga} per 3 hari.\nDeskripsi: ${deskripsi}`;
+  
+      const imageAttachment = `Foto Barang: (${gambar})`;
+  
       const fullMessage = imageAttachment + message;
-
+  
       window.location.href = `https://api.whatsapp.com/send?phone=+6289684633222&text=${encodeURIComponent(fullMessage)}`;
     }
-  };
+  };  
 
   const filteredData = Barang.data.filter(item =>
-    item.kostum.toLowerCase().includes(searchQuery.toLowerCase())
+    item && item.nama && item.nama.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
