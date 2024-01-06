@@ -9,11 +9,11 @@ const Admin = () => {
   const [isPopupVisible, setPopupVisible] = useState(false);
   const [editedItem, setEditedItem] = useState({
     id: '',
-    kostum: '',
+    nama: '',
     gambar: '',
     deskripsi: '',
     harga: '',
-    status: 'tersedia',
+    status: '',
   });
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -40,11 +40,11 @@ const Admin = () => {
     setPopupVisible(false);
     setEditedItem({
       id: '',
-      kostum: '',
+      nama: '',
       gambar: '',
       deskripsi: '',
       harga: '',
-      status: 'tersedia',
+      status: '',
     });
   };
 
@@ -75,8 +75,7 @@ const Admin = () => {
     e.preventDefault();
 
     try {
-      const { id, ...data } = editedItem;
-      if (!id) {
+      if (!editedItem.id) {
         const response = await axios.post(`${API_URL}/add`, editedItem);
         console.log('Server response:', response.data);
       } else {
@@ -133,7 +132,7 @@ const Admin = () => {
         <table className="data-table">
           <thead>
             <tr>
-              <th>kostum</th>
+              <th>Nama</th>
               <th>Gambar</th>
               <th>Deskripsi</th>
               <th>Harga</th>
@@ -143,12 +142,12 @@ const Admin = () => {
           </thead>
           <tbody>
             {tableData
-              .filter((item) => item.kostum.toLowerCase().includes(searchQuery.toLowerCase()))
+              .filter((item) => item.nama.toLowerCase().includes(searchQuery.toLowerCase()))
               .map((item) => (
                 <tr key={item.id}>
-                  <td>{item.kostum}</td>
+                  <td>{item.nama}</td>
                   <td>
-                    <img src={item.gambar} alt={item.kostum} className="table-image" />
+                    <img src={item.gambar} alt={item.nama} className="table-image" />
                   </td>
                   <td>{item.deskripsi.slice(0, 20)}{item.deskripsi.length > 20 ? '...' : ''}</td>
                   <td>{`Rp. ${item.harga}`}</td>
@@ -179,11 +178,11 @@ const Admin = () => {
           <div className="popup-content">
             <h2>{editedItem.id ? 'Edit' : 'Tambah'} Barang</h2>
             <form onSubmit={handleFormSubmit}>
-              <label>kostum:</label>
+              <label>Nama:</label>
               <input
                 type="text"
-                name="kostum"
-                value={editedItem.kostum}
+                name="nama"
+                value={editedItem.nama}
                 onChange={handleInputChange}
                 required
               />
