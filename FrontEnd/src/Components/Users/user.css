@@ -3,12 +3,17 @@
     flex-wrap: wrap;
     justify-content: space-around;
     margin-top: 20px;
+    background-image: url("backgron.JPG");
+    background-size: cover;
+    padding-top: 80px;
+    /* opacity: 0.6; */
 }
 
 .card {
     width: 300px;
     margin: 20px;
     border: 1px solid #ccc;
+    background-color: aliceblue;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -17,7 +22,7 @@
 .card-image {
     width: 100%;
     height: 200px;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .card-content {
@@ -104,4 +109,10 @@
   .popup button.message-btn {
     background-color: #4caf50; /* Warna hijau untuk tombol pesan */
     color: white;
+  }
+  .header{
+    position: fixed;
+  top: 0;
+  /* right: 0; */
+  width: 100%;
   }

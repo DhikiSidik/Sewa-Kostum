@@ -52,9 +52,9 @@ const DetailPopup = ({ data, onClose, onMessageClick }) => {
   return (
     <div className="popup">
       <div className="popup-content">
-        <img src={data.imageUrl} alt={data.namaBarang} className="popup-image" />
-        <h2>{data.namaBarang}</h2>
-        <p>Deskripsi: {data.Deskripsi}</p>
+        <img src={data.gambar} alt={data.namaBarang} className="popup-image" />
+        <h2>{data.kostum}</h2>
+        <p>Deskripsi: {data.deskripsi}</p>
         <p>Harga Sewa: {data.hargaSewa} per 3 hari</p>
         <p>Status: {data.status}</p>
         <div className="popup-buttons">
@@ -120,6 +120,7 @@ const User = () => {
   return (
     <div className="body">
       <header className="header">
+        <title>Ali Cosrent</title>
         <div className="left-section">
           <h1 className='admin-dashboard'>ALI-COSRENT</h1>
         </div>
