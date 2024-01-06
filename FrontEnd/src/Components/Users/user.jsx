@@ -73,6 +73,7 @@ const DetailPopup = ({ data, onClose, onMessageClick }) => {
 const User = () => {
   const [isPopupOpen, setPopupOpen] = useState(false);
   const [selectedData, setSelectedData] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
   const [Barang, setBarang] = useState({ data: [] });
   useEffect(() => {
     const fetchData = async () => {
@@ -116,6 +117,9 @@ const User = () => {
     }
   };
 
+  const filteredData = Barang.data.filter(item =>
+    item.kostum.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <div className="body">
@@ -126,7 +130,12 @@ const User = () => {
         </div>
         <div className="right-section">
           <div className="search-container">
-            <input type="text" placeholder="Search..." />
+            <input
+              type="text"
+              placeholder="Search..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
             <FontAwesomeIcon icon={faSearch} className='icon-search' />
           </div>
           <div className="login-container">
@@ -135,7 +144,7 @@ const User = () => {
         </div>
       </header>
       <div className="card-container">
-        {Barang.data.map(item => (
+        {filteredData.map(item => (
           <Card
             key={item.id}
             imageUrl={item.gambar}

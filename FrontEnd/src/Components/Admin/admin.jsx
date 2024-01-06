@@ -44,7 +44,7 @@ const Admin = () => {
       gambar: '',
       deskripsi: '',
       harga: '',
-      status: '',
+      status: 'tersedia',
     });
   };
 
@@ -75,8 +75,8 @@ const Admin = () => {
     e.preventDefault();
 
     try {
-      if (!editedItem.id) {
-        const { id, ...newItem } = editedItem;
+      const { id, ...data } = editedItem;
+      if (!id) {
         const response = await axios.post(`${API_URL}/add`, editedItem);
         console.log('Server response:', response.data);
       } else {
