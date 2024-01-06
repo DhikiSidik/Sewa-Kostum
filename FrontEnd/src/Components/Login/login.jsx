@@ -21,7 +21,10 @@ const Login = () => {
       });
 
       if (response.status === 200) {
-        // If authenticated, navigate to the admin page
+        // If authenticated, store the token and navigate to the admin page
+        const { token, user } = response.data;
+        localStorage.setItem('token', token);
+        localStorage.setItem('user', JSON.stringify(user));
         navigate('/admin');
       } else {
         console.log('Authentication failed');
